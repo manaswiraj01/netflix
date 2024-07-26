@@ -7,26 +7,19 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import Footer from "./Footer";
+import { BACKGROUND_IMAGE, USER_AVTAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -50,8 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
+            photoURL: USER_AVTAR,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -63,7 +55,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -82,8 +73,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
           name.current.value = "";
         })
         .catch((error) => {
@@ -101,7 +90,7 @@ const Login = () => {
       <Header />
       <div className="absolute brightness-50">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/655a9668-b002-4262-8afb-cf71e45d1956/5ff265b6-3037-44b2-b071-e81750b21783/IN-en-20240715-POP_SIGNUP_TWO_WEEKS-perspective_WEB_c6d6616f-4478-4ac2-bdac-f54b444771dd_large.jpg"
+          src= {BACKGROUND_IMAGE}
           alt="background-image"
         />
       </div>
@@ -130,7 +119,7 @@ const Login = () => {
 
         <input
           ref={password}
-          type={passwordVisible ? "text" : "password"}
+          type="password"
           placeholder="Password"
           className="p-2 my-2 w-full rounded-md bg-gray-50 bg-opacity-10 h-14"
         />
