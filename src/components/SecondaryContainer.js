@@ -5,17 +5,20 @@ import { useSelector } from "react-redux";
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
 
+  const nowPlayingMovies = movies?.nowPlayingMovies || [];
+  const topRatedMovies = movies?.topRatedMovies || [];
+  const upcomingMovies = movies?.upcomingMovies || [];
+  const popularMovies = movies?.popularMovies || [];
+
   return (
-    movies.nowPlayingMovies && (
       <div className="bg-black">
-        <div className="-mt-72 pl-20 z-10 relative">
-          <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
-          <MovieList title={"Top Rated"} movies={movies.topRatedMovies} />
-          <MovieList title={"Upcoming"} movies={movies.upcomingMovies} />
-          <MovieList title={"Popular"} movies={movies.popularMovies} />
+        <div className="-mt-64 pl-16 z-10 relative">
+          <MovieList title={"Now Playing"} movies={nowPlayingMovies} />
+          <MovieList title={"Top Rated"} movies={topRatedMovies} />
+          <MovieList title={"Upcoming"} movies={upcomingMovies} />
+          <MovieList title={"Popular"} movies={popularMovies} />
         </div>
       </div>
-    )
   );
 };
 

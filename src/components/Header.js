@@ -46,7 +46,7 @@ const Header = () => {
 
 
   return (
-    <div className="absolute w-full px-10 py-4 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-full px-10 bg-black z-10 flex justify-between">
       <img
         className="w-48"
         src= {LOGO}
@@ -55,7 +55,7 @@ const Header = () => {
 
       {user && (
         <div className="flex">
-          <img className="w-12 h-12 my-4" src={user?.photoURL} alt="usericon" />
+          <img className="w-12 h-12 mt-4 rounded-md" src={user?.photoURL} alt="usericon" />
           <button
             onClick={handleButtonClick}
             className="py-2 px-4 m-4 rounded-md bg-red-600 text-white hover:bg-red-700"
